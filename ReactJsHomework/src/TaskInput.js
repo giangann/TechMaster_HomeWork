@@ -1,11 +1,27 @@
 import { useState } from "react";
 import { Input } from "antd";
+import { HandleAddTask, OnChangeTaskInput } from "./redux/ActionCreator";
+import { useDispatch, useSelector } from "react-redux";
 
-function TaskInput({ handleSubmit }) {
+function TaskInput({ todo }) {
   // state save what user type in input field
-  const [value, setValue] = useState("");
+  const value = useSelector(state => state.value);
   const handleChange = (e) => {
-    setValue(e.target.value);
+    dispatch(OnChangeTaskInput(e.target.value));
+  };
+
+  // validate user input (not allow string is null or spaces only)
+  function isEmptyOrSpaces(str) {
+    return str === null || str.match(/^ *$/) !== null;
+  }
+
+  // use Dispatch to dispatch action to reducer
+  const dispatch = useDispatch();
+
+  const handleSubmit = (value) => {
+    if (!isEmptyOrSpaces(value)) {
+      dispatch(HandleAddTask(value));
+    }
   };
 
   return (
@@ -16,7 +32,6 @@ function TaskInput({ handleSubmit }) {
         onPressEnter={(e) => {
           // e.preventDefault()
           handleSubmit(value);
-          setValue("");
         }}
         placeholder="Type todo work"
         value={value}

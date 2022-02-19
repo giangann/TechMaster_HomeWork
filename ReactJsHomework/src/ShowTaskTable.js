@@ -1,12 +1,26 @@
 import { Button, Checkbox } from "antd";
+import { useDispatch } from "react-redux";
+import {
+  HandleCheckCompleted,
+  HandleCheckFavourite,
+} from "./redux/ActionCreator";
 import { AiFillHeart } from "react-icons/ai";
-function ShowTaskTable({ todo, handleCheck, handleFavorite }) {
+function ShowTaskTable({ todo }) {
+  const dispatch = useDispatch();
+  const handleCheck = (id, value) => {
+    dispatch(HandleCheckCompleted(id, value));
+    console.log(todo.taskName);
+    console.log(todo.isCompleted);
+  };
+
+  const handleFavourite = (id, value) => {
+    dispatch(HandleCheckFavourite(id, value));
+  };
   return (
     <div className="Todo_Card" key={todo.id}>
       <Checkbox
-        onChange={(e) => {
-          handleCheck(todo.id, e.target.checked);
-          console.log(todo.completedDate);
+        onChange={() => {
+          handleCheck(todo.id, !todo.isCompleted);
         }}
         checked={todo.isCompleted}
       />
@@ -32,14 +46,11 @@ function ShowTaskTable({ todo, handleCheck, handleFavorite }) {
         ""
       ) : (
         <AiFillHeart
-          onClick={() => {
-            handleFavorite(todo.id, !todo.isFavorite);
-          }}
+          onClick={()=>handleFavourite(todo.id, !todo.isFavorite)}
           size={24}
-          style={todo.isFavorite ? { fill: "red" } : ""}
+          color={todo.isFavorite ? "red" : ""}
         />
       )}
-
       <Button>Delete</Button>
     </div>
   );

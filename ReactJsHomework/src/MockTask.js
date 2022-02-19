@@ -24,7 +24,7 @@ export const MockTask = [
     createdDate: new Date(),
     completedDate: null,
     taskName: "Lau nhà",
-    isFavorite: true,
+    isFavorite: false,
     isCompleted: false,
     user: "sylk",
   },
