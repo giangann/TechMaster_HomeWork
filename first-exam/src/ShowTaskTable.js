@@ -9,6 +9,7 @@ function ShowTaskTable({ todo, handleCheck }) {
         console.log(todo.taskName)
         }}
         className="CheckBox_Button"
+        checked= {todo.isCompleted}
       />
       {todo.isCompleted ? (
         <p className="Task_Completed">{todo.taskName}</p>
