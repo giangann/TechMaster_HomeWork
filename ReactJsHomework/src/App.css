@@ -45,6 +45,10 @@
   margin: auto;
 }
 
+.Task_Content{
+  display: flex;
+  flex-direction: column;
+}
 .Todo_TaskName{
   margin-left: 20px;
 }
@@ -54,8 +58,8 @@
   justify-content: space-between;
 }
 
-.Todo_Card>p{
-  width: 80%;
+.Todo_Card>div{
+  max-width: 70%;
 }
 
 .Task_Name{
@@ -71,5 +75,6 @@
 .Task_Time{
   font-size:small;
   font-style: italic;
+
 }
 

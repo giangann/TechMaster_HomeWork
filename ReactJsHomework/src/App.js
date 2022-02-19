@@ -5,7 +5,7 @@ import ShowTaskTable from "./ShowTaskTable";
 import { useState } from "react";
 import { MockTask } from "./MockTask";
 import "antd/dist/antd.css";
-import _, { isEmpty } from "lodash";
+import _, { isEmpty, values } from "lodash";
 
 function App() {
   // save Todo List to state
@@ -16,7 +16,7 @@ function App() {
 
   // order 2 table with completedDate and createdDate properties
   const todoCompleted = _.orderBy(partition[0], "completedDate", "asc");
-  const todoNotCompleted = _.orderBy(partition[1], "createdDate", "asc");
+  const todoNotCompleted = _.orderBy(partition[1], ["isFavorite","createdDate"], "desc");
 
   // validate user input (not allow string is null or spaces only)
   function isEmptyOrSpaces(str) {
@@ -30,7 +30,7 @@ function App() {
         createdDate: new Date(),
         completedDate: null,
         taskName: newTodoName,
-        isFavorite: true,
+        isFavorite: false,
         isCompleted: false,
         user: "sylk",
       };
@@ -44,8 +44,6 @@ function App() {
   const handleDelete = (e, id) => {
     console.log("delete");
   };
-  console.log(new Date());
-  console.log(typeof new Date());
   // define function when user check todo work that completed
   const handleCheck = (id, status) => {
     const temp_TodoList = todo.map((todo) =>
@@ -59,6 +57,16 @@ function App() {
     );
     setTodo(temp_TodoList);
   };
+
+  // define function when user check todo work that completed
+  const handleFavorite = (id, value) =>{
+    const temp_TodoList = todo.map(todo =>todo.id === id ?{
+      ...todo,
+      isFavorite: value
+    }:todo)
+    setTodo(temp_TodoList)
+  }
+
   return (
     <div className="Todo_Table">
       <TaskInput handleSubmit={handleSubmit} />
@@ -66,11 +74,11 @@ function App() {
       <div className="Todo_List">
         <h1>Task Completed</h1>
         {todoCompleted.map((todo) => (
-          <ShowTaskTable handleCheck={handleCheck} todo={todo} key={todo.id} />
+          <ShowTaskTable handleFavorite={handleFavorite} handleCheck={handleCheck} todo={todo} key={todo.id} />
         ))}
         <h1>Task Not Completed</h1>
         {todoNotCompleted.map((todo) => (
-          <ShowTaskTable handleCheck={handleCheck} todo={todo} key={todo.id} />
+          <ShowTaskTable handleFavorite={handleFavorite} handleCheck={handleCheck} todo={todo} key={todo.id} />
         ))}
       </div>
     </div>

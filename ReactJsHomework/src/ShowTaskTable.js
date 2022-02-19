@@ -1,6 +1,6 @@
 import { Button, Checkbox } from "antd";
-
-function ShowTaskTable({ todo, handleCheck }) {
+import { AiFillHeart } from "react-icons/ai";
+function ShowTaskTable({ todo, handleCheck, handleFavorite }) {
   return (
     <div className="Todo_Card" key={todo.id}>
       <Checkbox
@@ -9,7 +9,9 @@ function ShowTaskTable({ todo, handleCheck }) {
           console.log(todo.completedDate);
         }}
         checked={todo.isCompleted}
-      >
+      />
+
+      <div className="Task_Content">
         <div className="Task_Name">
           <p
             className={
@@ -24,7 +26,19 @@ function ShowTaskTable({ todo, handleCheck }) {
             ? "Completed date: " + todo.completedDate
             : "Created date: " + todo.createdDate}
         </p>
-      </Checkbox>
+      </div>
+
+      {todo.isCompleted ? (
+        ""
+      ) : (
+        <AiFillHeart
+          onClick={() => {
+            handleFavorite(todo.id, !todo.isFavorite);
+          }}
+          size={24}
+          style={todo.isFavorite ? { fill: "red" } : ""}
+        />
+      )}
 
       <Button>Delete</Button>
     </div>

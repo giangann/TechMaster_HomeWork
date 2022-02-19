@@ -1,0 +1,15 @@
+lockfileVersion: 5.3
+
+specifiers:
+  react-icons: ^4.3.1
+
+dependencies:
+  react-icons: 4.3.1
+
+packages:
+
+  /react-icons/4.3.1:
+    resolution: {integrity: sha512-cB10MXLTs3gVuXimblAdI71jrJx8njrJZmNMEMC+sQu5B/BIOmlsAjskdqpn81y8UBVEGuHODd7/ci5DvoSzTQ==}
+    peerDependencies:
+      react: '*'
+    dev: false
