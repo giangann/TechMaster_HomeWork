@@ -5,7 +5,7 @@ import ShowTaskTable from "./ShowTaskTable";
 import { useState } from "react";
 import { MockTask } from "./MockTask";
 import "antd/dist/antd.css";
-import _ from "lodash";
+import _, { isEmpty } from "lodash";
 
 function App() {
   // save Todo List to state
@@ -18,34 +18,42 @@ function App() {
   const todoCompleted = _.orderBy(partition[0], "completedDate", "asc");
   const todoNotCompleted = _.orderBy(partition[1], "createdDate", "asc");
 
-  // define function when user submit
+  // validate user input (not allow string is null or spaces only)
+  function isEmptyOrSpaces(str) {
+    return str === null || str.match(/^ *$/) !== null;
+  }
+  // define function when user submit with 'isEmptyOrSpaces function to validate'
   const handleSubmit = (newTodoName) => {
-    const newTodo = {
-      id: uuidv4(),
-      createdDate: uuidv4(),
-      completedDate: new Date().getTime(),
-      taskName: newTodoName,
-      isFavorite: true,
-      isCompleted: false,
-      user: "sylk",
-    };
-    console.log(newTodo.createdDate)
-    setTodo([...todo, newTodo]);
-    console.log(newTodoName);
+    if (!isEmptyOrSpaces(newTodoName)) {
+      const newTodo = {
+        id: uuidv4(),
+        createdDate: new Date(),
+        completedDate: null,
+        taskName: newTodoName,
+        isFavorite: true,
+        isCompleted: false,
+        user: "sylk",
+      };
+      console.log(newTodo.createdDate);
+      setTodo([...todo, newTodo]);
+      console.log(newTodoName);
+    }
   };
 
   // define function when user delete todo work
   const handleDelete = (e, id) => {
     console.log("delete");
   };
-
+  console.log(new Date());
+  console.log(typeof new Date());
+  // define function when user check todo work that completed
   const handleCheck = (id, status) => {
     const temp_TodoList = todo.map((todo) =>
       todo.id === id
         ? {
             ...todo,
             isCompleted: status,
-            // completedDate: n
+            completedDate: new Date(),
           }
         : todo
     );

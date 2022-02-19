@@ -6,16 +6,26 @@ function ShowTaskTable({ todo, handleCheck }) {
       <Checkbox
         onChange={(e) => {
           handleCheck(todo.id, e.target.checked);
-        console.log(todo.taskName)
+          console.log(todo.completedDate);
         }}
-        className="CheckBox_Button"
-        checked= {todo.isCompleted}
-      />
-      {todo.isCompleted ? (
-        <p className="Task_Completed">{todo.taskName}</p>
-      ) : (
-        <p className="Task_NotCompleted">{todo.taskName}</p>
-      )}
+        checked={todo.isCompleted}
+      >
+        <div className="Task_Name">
+          <p
+            className={
+              todo.isCompleted ? "Task_Completed" : "Task_NotCompleted"
+            }
+          >
+            {todo.taskName}
+          </p>
+        </div>
+        <p className="Task_Time">
+          {todo.isCompleted
+            ? "Completed date: " + todo.completedDate
+            : "Created date: " + todo.createdDate}
+        </p>
+      </Checkbox>
+
       <Button>Delete</Button>
     </div>
   );

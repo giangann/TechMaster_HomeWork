@@ -58,11 +58,18 @@
   width: 80%;
 }
 
+.Task_Name{
+  font-weight: bold;
+}
 .Task_Completed{
   opacity: 50%;
   text-decoration: line-through;
 }
 .Task_NotCompleted{
+}
 
+.Task_Time{
+  font-size:small;
+  font-style: italic;
 }
 
