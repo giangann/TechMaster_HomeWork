@@ -23,12 +23,13 @@ function App() {
     const newTodo = {
       id: uuidv4(),
       createdDate: uuidv4(),
-      completedDate: null,
+      completedDate: new Date().getTime(),
       taskName: newTodoName,
       isFavorite: true,
       isCompleted: false,
       user: "sylk",
     };
+    console.log(newTodo.createdDate)
     setTodo([...todo, newTodo]);
     console.log(newTodoName);
   };
@@ -44,6 +45,7 @@ function App() {
         ? {
             ...todo,
             isCompleted: status,
+            // completedDate: n
           }
         : todo
     );
