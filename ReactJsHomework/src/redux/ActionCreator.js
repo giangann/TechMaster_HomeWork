@@ -39,3 +39,13 @@ export const OnChangeTaskInput = (value) =>{
         }
     }
 }
+export const HandleLogin = () =>{
+    return{
+        type:"HANDLE_LOGIN",
+    }
+}
+export const HandleLogout = () =>{
+    return{
+        type:"HANDLE_LOGOUT",
+    }
+}

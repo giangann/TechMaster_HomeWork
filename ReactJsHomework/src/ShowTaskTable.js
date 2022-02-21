@@ -9,8 +9,6 @@ function ShowTaskTable({ todo }) {
   const dispatch = useDispatch();
   const handleCheck = (id, value) => {
     dispatch(HandleCheckCompleted(id, value));
-    console.log(todo.taskName);
-    console.log(todo.isCompleted);
   };
 
   const handleFavourite = (id, value) => {
