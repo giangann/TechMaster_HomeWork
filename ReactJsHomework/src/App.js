@@ -7,6 +7,7 @@ import {
   Link,
   BrowserRouter,
 } from "react-router-dom";
+import Axios from "./AxiosPage";
 import Home from "./Home";
 
 import Login from "./Login";
@@ -24,6 +25,7 @@ function App() {
           }
         />
         <Route path="/login" element={<Login />} />
+        <Route path="/axios" element={<Axios/>}/>
       </Routes>
     </BrowserRouter>
   );
