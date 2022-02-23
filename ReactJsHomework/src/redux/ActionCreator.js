@@ -12,14 +12,13 @@ export const HandleAddTask = (newTaskName) => {
 export const AddTodoApiAsync = (newTaskName)=> async(dispatch,getState) =>{
   await TodoServices.PostTodoApi(newTaskName)
   dispatch(HandleAddTask(newTaskName))
+  console.log ("dispatch add todo async")
 }
-
 
 export const GetTodoApiAsync =() => async (dispatch) => {
   const response = await TodoServices.GetTodoApi();
   dispatch ({
       type:"GET_TODO_REDUX",  
-
       payload:{
           taskList: response.data.data
       }
@@ -39,6 +38,11 @@ export const HandleCheckCompleted = (id, value) => {
   };
 };
 
+export const HandleCheckCompletedApi = (id,status)=>async(dispatch) =>{
+  await TodoServices.CheckCompleted(id,status)
+  dispatch(HandleCheckCompleted(id,status))
+}
+
 export const HandleCheckFavourite = (id, value) => {
   return {
     type: "HANDLE_CHECK_FAVOURITE",
@@ -48,6 +52,10 @@ export const HandleCheckFavourite = (id, value) => {
     },
   };
 };
+export const HandleCheckFavouriteApi = (id,status)=>async(dispatch) =>{
+  await TodoServices.CheckFavourite(id,status)
+  dispatch(HandleCheckFavourite(id,status))
+}
 
 export const OnChangeTaskInput = (value) => {
   return {
@@ -58,6 +66,7 @@ export const OnChangeTaskInput = (value) => {
   };
 };
 export const HandleLogin = () => {
+  console.log ("Handle Login Called")
   return {
     type: "HANDLE_LOGIN",
   };

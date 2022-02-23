@@ -4,16 +4,24 @@ import ShowTaskTable from "./ShowTaskTable";
 import "antd/dist/antd.css";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
-import { GetTodoApiAsync, HandleLogout } from "./redux/ActionCreator";
+import { GetTodoApiAsync, HandleLogin, HandleLogout } from "./redux/ActionCreator";
 import { useEffect, useState } from "react";
 import TodoServices from "./Services/TodoServices";
 
 function Home() {
   const data = useSelector((state) => state);
   const todo = data.taskList;
-
+  const [count,setCount] = useState(1)
   const dispatch = useDispatch();
-  dispatch(GetTodoApiAsync());
+
+  console.log(todo)
+  useEffect(() =>{
+    const fetchApi = () =>{
+      dispatch(GetTodoApiAsync())
+    }
+    fetchApi()
+  }, [count])
+  
   // //useState to save data from api fetch:
   // const [todo,setTodo] = useState([])
 
