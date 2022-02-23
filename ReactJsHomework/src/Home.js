@@ -4,12 +4,18 @@ import ShowTaskTable from "./ShowTaskTable";
 import "antd/dist/antd.css";
 import _ from "lodash";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router";
-import { HandleLogout } from "./redux/ActionCreator";
+import { GetTodoApiAsync, HandleLogout } from "./redux/ActionCreator";
+import { useEffect, useState } from "react";
+import TodoServices from "./Services/TodoServices";
 
 function Home() {
   const data = useSelector((state) => state);
   const todo = data.taskList;
+
+  const dispatch = useDispatch();
+  dispatch(GetTodoApiAsync());
+  // //useState to save data from api fetch:
+  // const [todo,setTodo] = useState([])
 
   // partition to 2 table (todoCompleted and todoNotCompleted)
   const partition = _.partition(todo, (todo) => todo.isCompleted);
@@ -28,17 +34,15 @@ function Home() {
   };
 
   // define function when user logout
-  const navigate =  useNavigate()
-  const dispatch = useDispatch()
-  const handleLogOut = ()=>{
-    dispatch(HandleLogout())
-  }
+  const handleLogOut = () => {
+    dispatch(HandleLogout());
+  };
   return (
     <div className="Todo_Table">
       <button onClick={handleLogOut}>Log Out</button>
       <TaskInput />
       <div className="Todo_List">
-        <h1>Task Completed</h1>
+        <h1> Completed</h1>
         {todoCompleted.map((todo) => (
           <ShowTaskTable todo={todo} key={todo.id} />
         ))}
