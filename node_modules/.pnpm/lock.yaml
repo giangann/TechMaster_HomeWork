@@ -2,9 +2,11 @@ lockfileVersion: 5.3
 
 specifiers:
   react-icons: ^4.3.1
+  redux-thunk: ^2.4.1
 
 dependencies:
   react-icons: 4.3.1
+  redux-thunk: 2.4.1
 
 packages:
 
@@ -12,4 +14,10 @@ packages:
     resolution: {integrity: sha512-cB10MXLTs3gVuXimblAdI71jrJx8njrJZmNMEMC+sQu5B/BIOmlsAjskdqpn81y8UBVEGuHODd7/ci5DvoSzTQ==}
     peerDependencies:
       react: '*'
+    dev: false
+
+  /redux-thunk/2.4.1:
+    resolution: {integrity: sha512-OOYGNY5Jy2TWvTL1KgAlVy6dcx3siPJ1wTq741EPyUKfn6W6nChdICjZwCd0p8AZBs5kWpZlbkXW2nE/zjUa+Q==}
+    peerDependencies:
+      redux: ^4
     dev: false

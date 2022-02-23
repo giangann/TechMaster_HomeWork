@@ -1,10 +1,16 @@
 import { MockTask } from "../MockTask";
 import { v4 as uuidv4 } from "uuid";
 const reducer = (
-  state = { taskList: MockTask, onChangeVal: "", isLoggedIn: false },
+  state = { taskList: MockTask, onChangeVal: "", isLoggedIn: true },
   action
 ) => {
   switch (action.type) {
+    case "GET_TODO_REDUX":{
+      return{
+        ...state,
+        taskList: action.payload.taskList
+      }
+    }
     case "HANDLE_ADD_TASK": {
       const newTask = {
         id: uuidv4(),

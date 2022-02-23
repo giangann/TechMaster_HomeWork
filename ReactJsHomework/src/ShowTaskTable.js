@@ -2,18 +2,23 @@ import { Button, Checkbox } from "antd";
 import { useDispatch } from "react-redux";
 import {
   HandleCheckCompleted,
+  HandleCheckCompletedApi,
   HandleCheckFavourite,
+  HandleCheckFavouriteApi,
 } from "./redux/ActionCreator";
 import { AiFillHeart } from "react-icons/ai";
 function ShowTaskTable({ todo }) {
   const dispatch = useDispatch();
+
   const handleCheck = (id, value) => {
-    dispatch(HandleCheckCompleted(id, value));
+    dispatch(HandleCheckCompletedApi(id, value));
   };
 
   const handleFavourite = (id, value) => {
-    dispatch(HandleCheckFavourite(id, value));
+    dispatch(HandleCheckFavouriteApi(id, value));
   };
+
+  
   return (
     <div className="Todo_Card" key={todo.id}>
       <Checkbox
